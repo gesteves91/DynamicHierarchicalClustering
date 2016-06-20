@@ -71,6 +71,7 @@ public class HierarchicalCluster {
 		for (int i = 0; i < 10000000; i++) 
 			total += i;
 		double[][] d = ReadFile.run();
+		//Dynamic array that avoids checking out the main matriz n * n times
 		int[] dmin = new int[d.length];
 		
 		ArrayList<Integer> count = new ArrayList<Integer>();
@@ -125,8 +126,6 @@ public class HierarchicalCluster {
 			for(int i : nonDup)
 				System.out.println(i);
 
-			//HierarchicalCluster.printMatrix(d);
-
 			for(String s : al){
 				//System.out.print(s + " ");
 				w.write(s + " ");
@@ -134,27 +133,8 @@ public class HierarchicalCluster {
 				w.write(System.getProperty("line.separator"));
 			}
 		
-		//findSmallerDistance();
-		
-		//for(int i = 0; i < mat.length; i++){
-			//for (int j = 0; j < mat[0].length; j++)
-				//System.out.print(mat[i][j] + "  |  ");
-			//System.out.println("\n");
-		//}
-		
-		//findSmallerDistance(mat);
-		
-		
-		//double[][] mat = new double[p.size()][p.size()];
-		/*for (int i = 0; i < 1; i++) {
-		    for (int j = 0; j < mat[0].length; j++) {
-		        System.out.print(mat[i][j] + " ");
-		    }
-		    System.out.print("\n");
-		}*/
 			long stopTime = System.currentTimeMillis();
 			long elapsedTime = stopTime - startTime;
-			//System.out.println(elapsedTime);	
 			
 		} catch (IOException ex) {
 			// report
