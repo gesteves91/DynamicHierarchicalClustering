@@ -13,40 +13,18 @@ import java.util.Set;
 
 public class HierarchicalCluster {
 	
-	public static void findSmallerDistance(double[][] mat){
-		double smaller = mat[0][0];
-		
-		int[] cluster = new int[2];
+	public static double[] printMatrix(double[][] mat, int index){
+		double[] arr = new double[mat[0].length];
 		
 		for(int i = 0; i < mat.length; i++){
 			for (int j = 0; j < mat[0].length; j++){
-				if(mat[i][j] < smaller){
-					smaller = mat[i][j];
-					cluster[0] = i;
-					cluster[1] = j;
-				}
+				if(i == index)
+					arr[j] = mat[i][j];
+					//System.out.print(mat[i][j] + "  |  ");
 			}
+			//System.out.println("\n");
 		}
-		//Collections.sort(ReadFile.pearson);
-		//for (double d : ReadFile.pearson)
-			//System.out.println(d);
-		
-		//setAverage(mat, cluster);
-		//setSecondClusterAsNull(mat, cluster[1]);
-		
-		//System.out.println(smaller);
-		//System.out.println(cluster[0]);
-		//System.out.println(cluster[1]);
-		
-		printMatrix(mat);
-	}
-	
-	public static void printMatrix(double[][] mat){
-		for(int i = 0; i < mat.length; i++){
-			for (int j = 0; j < mat[0].length; j++)
-				System.out.print(mat[i][j] + "  |  ");
-			System.out.println("\n");
-		}
+		return arr;
 	}
 	
 	public static int[] removeDuplicates(int[] arr) {
@@ -71,8 +49,21 @@ public class HierarchicalCluster {
 		for (int i = 0; i < 10000000; i++) 
 			total += i;
 		double[][] d = ReadFile.run();
-		//Dynamic array that avoids checking out the main matriz n * n times
+		//Dynamic array that avoids checking out the main matrix n * n times
 		int[] dmin = new int[d.length];
+		
+		//int[] indexes = new int[]{157, 183, 318, 508, 1150, 1328};
+		
+		//for (int i = 0; i < indexes.length; i++) {
+			
+		
+		//double[] arr = HierarchicalCluster.printMatrix(d, indexes[i]);
+		
+		//for(int j = 0; j < indexes.length; j++)
+			//System.out.println(arr[indexes[j]]);
+		
+		//System.out.println("\n");
+		//}
 		
 		ArrayList<Integer> count = new ArrayList<Integer>();
 		
@@ -121,10 +112,29 @@ public class HierarchicalCluster {
 			for(int i = 0; i < elem.length; i++)
 				elem[i] = count.get(i);
 			
+			int[] countElements = new int[5];
+			
+			int aux = elem[0];
+			int c = 1;
+			
+			for(int i = 1, k = 0; i < elem.length; i++)
+				if(elem[i] == aux)
+					c++;
+				else {
+					countElements[k] = c;
+					k++;
+					c = 0;
+					aux = elem[i];
+					c++;
+				}
+				
+			for(int i : countElements)
+				System.out.println(i);
+			
 			int[] nonDup = HierarchicalCluster.removeDuplicates(elem);
 			
-			for(int i : nonDup)
-				System.out.println(i);
+			//for(int i : nonDup)
+				//System.out.println(i);
 
 			for(String s : al){
 				//System.out.print(s + " ");
@@ -135,6 +145,7 @@ public class HierarchicalCluster {
 		
 			long stopTime = System.currentTimeMillis();
 			long elapsedTime = stopTime - startTime;
+			System.out.println("Temporal Complexity:" + elapsedTime);
 			
 		} catch (IOException ex) {
 			// report
